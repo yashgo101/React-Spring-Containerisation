@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web-backend
+  template:
+    metadata:
+      labels:
+        component: web-backend
+    spec:
+      containers:
+        - name: spring-backend
+          image: azureacrdeploy.azurecr.io/nodespring-backend-img
+          env:
+            - name:  SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name:  demosecret
+                  key:  SPRING-DATASOURCE-URL
+            - name:  SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name:  demosecret
+                  key:  SPRING-DATASOURCE-USERNAME
+            - name:  SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name:  demosecret
+                  key:  SPRING-DATASOURCE-PASSWORD
+          ports:
+            - containerPort: 8089
+          volumeMounts:
+            - name:  secret-store
+              mountPath:  "mnt/secret-store"
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name:  secret-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "demo-secret"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web-frontend
+  template:
+    metadata:
+      labels:
+        component: web-frontend
+    spec:
+      containers:
+        - name: react-frontend
+          image: azureacrdeploy.azurecr.io/nodereact-frontend-img
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always

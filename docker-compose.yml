@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    
+    spring-backend:
+      image: azureacrdeploy.azurecr.io/nodespring-backend-img
+      container_name: spring-backend
+      build:
+        context: ./Spring-Boot-CRUD-Example
+        dockerfile: Dockerfile
+      ports:
+        - '8089:8089'
+      restart: always
+      environment: 
+          SPRING_DATASOURCE_URL: jdbc:mysql://yashserver2.mysql.database.azure.com:3306/employeedb?serverTimezone=UTC&createDatabaseIfNotExist=true
+          SPRING_DATASOURCE_USERNAME: host
+          SPRING_DATASOURCE_PASSWORD: player
+
+    react-frontend:
+      image: azureacrdeploy.azurecr.io/nodereact-frontend-img
+      container_name: react-frontend
+      build:
+        context: ./employeecrud
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      restart: always
+      depends_on:
+        - spring-backend
+

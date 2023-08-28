@@ -1,0 +1,110 @@
+2023-07-02 16:01:03.191+05:30 ERROR c.m.applicationinsights.agent - 
+*************************
+Application Insights Java Agent 3.4.14 startup failed (PID 31086)
+*************************
+
+Description:
+No connection string provided
+
+Action:
+Please provide connection string.
+
+2023-07-02 16:02:40.709+05:30 ERROR c.m.applicationinsights.agent - 
+*************************
+Application Insights Java Agent 3.4.14 startup failed (PID 31635)
+*************************
+
+Description:
+No connection string provided
+
+Action:
+Please provide connection string.
+
+2023-07-02 16:04:41.891+05:30 ERROR c.m.applicationinsights.agent - 
+*************************
+Application Insights Java Agent 3.4.14 startup failed (PID 32030)
+*************************
+
+Description:
+No connection string provided
+
+Action:
+Please provide connection string.
+
+2023-07-02 16:11:02.650+05:30 ERROR c.m.applicationinsights.agent - Application Insights Java Agent 3.4.14 startup failed (PID 33096)
+java.lang.IllegalArgumentException: Missing 'InstrumentationKey'
+	at com.azure.monitor.opentelemetry.exporter.implementation.configuration.ConnectionStringBuilder.mapToConnectionConfiguration(ConnectionStringBuilder.java:85)
+	at com.azure.monitor.opentelemetry.exporter.implementation.configuration.ConnectionStringBuilder.setConnectionString(ConnectionStringBuilder.java:39)
+	at com.azure.monitor.opentelemetry.exporter.implementation.configuration.ConnectionString.lambda$parse$0(ConnectionString.java:37)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at com.azure.monitor.opentelemetry.exporter.implementation.configuration.ConnectionString.parse(ConnectionString.java:36)
+	at com.microsoft.applicationinsights.agent.internal.telemetry.TelemetryClient$Builder.setConnectionStrings(TelemetryClient.java:487)
+	at com.microsoft.applicationinsights.agent.internal.init.SecondEntryPoint.customize(SecondEntryPoint.java:144)
+	at io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdkBuilder.build(AutoConfiguredOpenTelemetrySdkBuilder.java:327)
+	at io.opentelemetry.javaagent.tooling.OpenTelemetryInstaller.installOpenTelemetrySdk(OpenTelemetryInstaller.java:34)
+	at io.opentelemetry.javaagent.tooling.AgentInstaller.installBytebuddyAgent(AgentInstaller.java:120)
+	at io.opentelemetry.javaagent.tooling.AgentInstaller.installBytebuddyAgent(AgentInstaller.java:100)
+	at io.opentelemetry.javaagent.tooling.AgentStarterImpl.start(AgentStarterImpl.java:98)
+	at io.opentelemetry.javaagent.bootstrap.AgentInitializer$1.run(AgentInitializer.java:53)
+	at io.opentelemetry.javaagent.bootstrap.AgentInitializer$1.run(AgentInitializer.java:47)
+	at io.opentelemetry.javaagent.bootstrap.AgentInitializer.execute(AgentInitializer.java:64)
+	at io.opentelemetry.javaagent.bootstrap.AgentInitializer.initialize(AgentInitializer.java:46)
+	at io.opentelemetry.javaagent.OpenTelemetryAgent.startAgent(OpenTelemetryAgent.java:57)
+	at io.opentelemetry.javaagent.OpenTelemetryAgent.premain(OpenTelemetryAgent.java:45)
+	at com.microsoft.applicationinsights.agent.Agent.premain(Agent.java:38)
+	at com.microsoft.applicationinsights.agent.Agent.agentmain(Agent.java:44)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndStartAgent(InstrumentationImpl.java:491)
+	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndCallAgentmain(InstrumentationImpl.java:513)
+2023-07-02 16:12:03.186+05:30 INFO  c.m.applicationinsights.agent - Application Insights Java Agent 3.4.14 started successfully (PID 33316, JVM running for 3.28 s)
+2023-07-02 16:12:03.199+05:30 INFO  c.m.applicationinsights.agent - Java version: 17.0.7, vendor: Eclipse Adoptium, home: /home/yash/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.7.v20230425-1502/jre
+2023-07-02 16:13:17.032+05:30 ERROR c.azure.core.http.policy.RetryPolicy - {"az.sdk.message":"Retry attempts have been exhausted.","exception":"null: /169.254.169.254:80","tryCount":3}
+2023-07-02 16:38:47.259+05:30 WARN  c.a.m.o.e.i.q.QuickPulsePingSender - Pinging live metrics endpoint: io.netty.channel.unix.Errors$NativeIoException: recvAddress(..) failed: Connection reset by peer (https://centralindia.livediagnostics.monitor.azure.com/QuickPulseService.svc) (future warnings will be aggregated and logged once every 5 minutes)
+reactor.core.Exceptions$ReactiveException: io.netty.channel.unix.Errors$NativeIoException: recvAddress(..) failed: Connection reset by peer
+	at reactor.core.Exceptions.propagate(Exceptions.java:408)
+	at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:100)
+	at reactor.core.publisher.Mono.block(Mono.java:1712)
+	at com.azure.monitor.opentelemetry.exporter.implementation.quickpulse.QuickPulsePingSender.ping(QuickPulsePingSender.java:101)
+	at com.azure.monitor.opentelemetry.exporter.implementation.quickpulse.QuickPulseCoordinator.ping(QuickPulseCoordinator.java:99)
+	at com.azure.monitor.opentelemetry.exporter.implementation.quickpulse.QuickPulseCoordinator.run(QuickPulseCoordinator.java:52)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+	Suppressed: java.lang.Exception: #block terminated with an error
+		at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:102)
+		... 5 common frames omitted
+Caused by: io.netty.channel.unix.Errors$NativeIoException: recvAddress(..) failed: Connection reset by peer
+2023-07-02 16:39:12.290+05:30 ERROR c.a.m.o.e.i.q.QuickPulsePingSender - 
+*************************
+Application Insights Java failed to connect to https://centralindia.livediagnostics.monitor.azure.com/QuickPulseService.svc
+*************************
+
+Description:
+Unable to resolve host in url
+
+Action:
+Please update your network configuration so that the host in this url can be resolved: https://centralindia.livediagnostics.monitor.azure.com/QuickPulseService.svc
+Learn more about troubleshooting unknown host exception here: https://go.microsoft.com/fwlink/?linkid=2185830
+
+Note:
+This message is only logged the first time it occurs after startup.
+
+2023-07-02 16:40:12.266+05:30 ERROR c.a.m.o.e.i.p.TelemetryPipeline - 
+*************************
+Application Insights Java failed to connect to https://centralindia-0.in.applicationinsights.azure.com/v2.1/track
+*************************
+
+Description:
+Unable to resolve host in url
+
+Action:
+Please update your network configuration so that the host in this url can be resolved: https://centralindia-0.in.applicationinsights.azure.com/v2.1/track
+Learn more about troubleshooting unknown host exception here: https://go.microsoft.com/fwlink/?linkid=2185830
+
+Note:
+This message is only logged the first time it occurs after startup.
+
+2023-07-02 18:23:16.086+05:30 INFO  c.m.applicationinsights.agent - Application Insights Java Agent 3.4.14 started successfully (PID 46450, JVM running for 4.583 s)
+2023-07-02 18:23:16.105+05:30 INFO  c.m.applicationinsights.agent - Java version: 17.0.7, vendor: Eclipse Adoptium, home: /home/yash/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.7.v20230425-1502/jre
+2023-07-02 18:24:29.193+05:30 ERROR c.azure.core.http.policy.RetryPolicy - {"az.sdk.message":"Retry attempts have been exhausted.","exception":"null: /169.254.169.254:80","tryCount":3}

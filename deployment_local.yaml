@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web-backend
+  template:
+    metadata:
+      labels:
+        component: web-backend
+    spec:
+      containers:
+        - name: spring-backend
+          image: azureacrdeploy.azurecr.io/nodespring-backend-img
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://yashserver2.mysql.database.azure.com:3306/employeedb?serverTimezone=UTC&createDatabaseIfNotExist=true
+            - name: SPRING_DATASOURCE_USERNAME
+              value: host
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: player
+          ports:
+            - containerPort: 8089
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web-frontend
+  template:
+    metadata:
+      labels:
+        component: web-frontend
+    spec:
+      containers:
+        - name: react-frontend
+          image: azureacrdeploy.azurecr.io/nodereact-frontend-img
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+      
